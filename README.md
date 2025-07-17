@@ -54,6 +54,12 @@ A powerful web application that transforms lengthy documents and notes into conc
 
 ## 🚀 Quick Start
 
+### 🌐 Try Online (Fastest)
+**[🚀 Live Demo on Hugging Face Spaces](https://huggingface.co/spaces/midlajvalappil/AI-Note-Summarizer)**
+- No installation required
+- Instant access in your browser
+- Full functionality available
+
 ### Option 1: Docker (Recommended)
 
 #### Prerequisites
@@ -255,28 +261,26 @@ self.max_file_size = 10 * 1024 * 1024  # 10MB
 <div align="center">
 
 ### Main Interface
-![Main Interface](https://via.placeholder.com/800x500/1f2937/ffffff?text=AI+Notes+Summarizer+Main+Interface)
+![Main Interface](Screenshots/Main%20interface.png)
 *Clean and intuitive interface with PDF upload and text input options*
 
 ### PDF Processing
-![PDF Processing](https://via.placeholder.com/800x500/3b82f6/ffffff?text=PDF+Processing+in+Action)
+![PDF Processing](Screenshots/pdf%20processing.png)
 *Real-time PDF processing with progress indicators*
 
 ### Summary Results
-![Summary Results](https://via.placeholder.com/800x500/10b981/ffffff?text=Generated+Summary+Results)
+![Summary Results](Screenshots/Summery%20Result.png)
 *Bullet-point summaries with statistics and download options*
 
 ### Settings Panel
-![Settings Panel](https://via.placeholder.com/800x500/8b5cf6/ffffff?text=AI+Model+Settings+%26+Configuration)
+![Settings Panel](Screenshots/settings%20panel.png)
 *Customizable AI model selection and summary length options*
 
 </div>
 
-> **Note**: Screenshots are placeholders. Actual screenshots will be added once the application is deployed.
-
 ## 🎥 Demo
 
-🚀 **[Live Demo](https://your-demo-url.com)** (Coming Soon)
+🚀 **[Live Demo](https://huggingface.co/spaces/midlajvalappil/AI-Note-Summarizer)** - Try it now on Hugging Face Spaces!
 
 📹 **Demo Video**: [Watch on YouTube](https://youtube.com/placeholder) (Coming Soon)
 
