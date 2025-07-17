@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  ai-notes-summarizer-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dependencies  # Stop at dependencies stage for faster rebuilds
+    container_name: ai-notes-summarizer-dev
+    ports:
+      - "8501:8501"
+    environment:
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+      - TRANSFORMERS_CACHE=/app/.cache/huggingface
+      - TORCH_HOME=/app/.cache/torch
+      - HF_HOME=/app/.cache/huggingface
+      - DEBUG=true
+    volumes:
+      # Mount source code for live development
+      - .:/app
+      # Model cache persistence
+      - model_cache_dev:/app/.cache
+      # Logs
+      - ./logs:/app/logs
+      # Uploads
+      - ./uploads:/app/uploads
+    working_dir: /app
+    command: ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true", "--server.fileWatcherType=poll"]
+    restart: unless-stopped
+    user: "1000:1000"  # Use host user ID to avoid permission issues
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: '2.0'
+
+volumes:
+  model_cache_dev:
+    driver: local

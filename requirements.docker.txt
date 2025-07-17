@@ -1,0 +1,27 @@
+# Docker-optimized requirements for AI Notes Summarizer
+# Core web framework
+streamlit>=1.28.0
+
+# AI/ML libraries - CPU optimized versions for smaller image size
+transformers>=4.35.0
+torch>=2.0.0,<2.1.0  # Pin to avoid large updates
+tokenizers>=0.14.0
+
+# PDF processing
+PyPDF2>=3.0.1
+
+# Text processing and utilities
+regex>=2023.10.3
+numpy>=1.24.0,<1.25.0  # Pin for stability
+pandas>=2.0.0,<2.1.0   # Pin for stability
+
+# Additional dependencies for transformers
+accelerate>=0.24.0
+safetensors>=0.4.0
+
+# Optional: For better performance (smaller package)
+sentencepiece>=0.1.99
+
+# Production dependencies
+gunicorn>=21.2.0  # For potential WSGI deployment
+uvicorn>=0.23.0   # Alternative ASGI server
