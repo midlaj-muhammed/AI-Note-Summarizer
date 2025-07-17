@@ -10,7 +10,13 @@ from pathlib import Path
 # Import custom modules
 from modules.pdf_processor import PDFProcessor
 from modules.text_summarizer import TextSummarizer
-from modules.utils import setup_logging, validate_input, display_summary_stats, format_file_size
+from modules.utils import (
+    setup_logging,
+    validate_input,
+    display_summary_stats,
+    format_file_size,
+)
+
 
 # Initialize components
 @st.cache_resource
@@ -20,13 +26,14 @@ def initialize_components():
     text_summarizer = TextSummarizer()
     return pdf_processor, text_summarizer
 
+
 def main():
     """Main application function"""
     st.set_page_config(
         page_title="AI Notes Summarizer",
         page_icon="📝",
         layout="wide",
-        initial_sidebar_state="expanded"
+        initial_sidebar_state="expanded",
     )
 
     # Initialize components
@@ -34,7 +41,9 @@ def main():
 
     # App header
     st.title("📝 AI Notes Summarizer")
-    st.markdown("Transform your lengthy documents and notes into concise, bullet-point summaries using AI.")
+    st.markdown(
+        "Transform your lengthy documents and notes into concise, bullet-point summaries using AI."
+    )
 
     # Sidebar for options
     st.sidebar.header("⚙️ Settings")
@@ -43,14 +52,14 @@ def main():
     model_options = {
         "BART (Recommended)": "facebook/bart-large-cnn",
         "T5 Small": "t5-small",
-        "DistilBART": "sshleifer/distilbart-cnn-12-6"
+        "DistilBART": "sshleifer/distilbart-cnn-12-6",
     }
 
     selected_model = st.sidebar.selectbox(
         "Choose AI Model:",
         options=list(model_options.keys()),
         index=0,
-        help="BART is recommended for best quality summaries"
+        help="BART is recommended for best quality summaries",
     )
 
     # Update text summarizer model if changed
@@ -63,16 +72,14 @@ def main():
         "Summary Length:",
         options=["Short", "Medium", "Long"],
         value="Medium",
-        help="Choose the desired length of the summary"
+        help="Choose the desired length of the summary",
     )
 
     # Update summary length settings
-    length_settings = {
-        "Short": (30, 150),
-        "Medium": (50, 300),
-        "Long": (100, 500)
-    }
-    text_summarizer.min_summary_length, text_summarizer.max_summary_length = length_settings[summary_length]
+    length_settings = {"Short": (30, 150), "Medium": (50, 300), "Long": (100, 500)}
+    text_summarizer.min_summary_length, text_summarizer.max_summary_length = (
+        length_settings[summary_length]
+    )
 
     # Main content area
     tab1, tab2 = st.tabs(["📄 PDF Upload", "📝 Text Input"])
@@ -82,9 +89,7 @@ def main():
         st.markdown("Upload a PDF file to extract and summarize its content.")
 
         uploaded_file = st.file_uploader(
-            "Choose a PDF file",
-            type=['pdf'],
-            help="Upload a PDF file (max 10MB)"
+            "Choose a PDF file", type=["pdf"], help="Upload a PDF file (max 10MB)"
         )
 
         if uploaded_file is not None:
@@ -105,9 +110,13 @@ def main():
                         with st.expander("📝 View Extracted Text (Preview)"):
                             st.text_area(
                                 "Extracted Content:",
-                                value=extracted_text[:1000] + "..." if len(extracted_text) > 1000 else extracted_text,
+                                value=(
+                                    extracted_text[:1000] + "..."
+                                    if len(extracted_text) > 1000
+                                    else extracted_text
+                                ),
                                 height=200,
-                                disabled=True
+                                disabled=True,
                             )
 
                         # Generate summary
@@ -129,7 +138,7 @@ def main():
                                 label="💾 Download Summary",
                                 data=summary,
                                 file_name=f"{uploaded_file.name}_summary.txt",
-                                mime="text/plain"
+                                mime="text/plain",
                             )
 
     with tab2:
@@ -140,7 +149,7 @@ def main():
             "Enter your text here:",
             height=300,
             placeholder="Paste your text content here...",
-            help="Minimum 100 characters required for effective summarization"
+            help="Minimum 100 characters required for effective summarization",
         )
 
         # Character count
@@ -168,7 +177,7 @@ def main():
                         label="💾 Download Summary",
                         data=summary,
                         file_name="text_summary.txt",
-                        mime="text/plain"
+                        mime="text/plain",
                     )
 
     # Footer
@@ -179,8 +188,9 @@ def main():
             <p>AI Notes Summarizer | Powered by Hugging Face Transformers</p>
         </div>
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
+
 
 if __name__ == "__main__":
     main()
